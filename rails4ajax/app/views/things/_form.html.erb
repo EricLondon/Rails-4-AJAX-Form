@@ -1,15 +1,14 @@
-<%= form_for(@thing) do |f| %>
-  <% if @thing.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@thing.errors.count, "error") %> prohibited this thing from being saved:</h2>
+<%= form_for(@thing, remote: true, format: :json, html: {class: :thing_form}) do |f| %>
 
-      <ul>
-      <% @thing.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+  <div id="error_explanation" style='display:none;'>
+    <ul>
+      <% if @thing.errors.any? %>
+        <% @thing.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </ul>
+  </div>
 
   <div class="field">
     <%= f.label :title %><br>
